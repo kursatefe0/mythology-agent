@@ -64,7 +64,7 @@ def get_or_build_db(embeddings):
 def create_qa_chain():
     embeddings = HuggingFaceEmbeddings(model_name="intfloat/multilingual-e5-small")
     db = get_or_build_db(embeddings)
-   retriever = db.as_retriever(search_kwargs={"k": 3})
+    retriever = db.as_retriever(search_kwargs={"k": 3})
 
 
     api_key = os.environ.get("GOOGLE_API_KEY")
