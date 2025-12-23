@@ -64,7 +64,7 @@ def get_or_build_db(embeddings):
 def create_qa_chain():
     embeddings = HuggingFaceEmbeddings(model_name="intfloat/multilingual-e5-small")
     db = get_or_build_db(embeddings)
-    retriever = db.as_retriever(search_kwargs={"k": 3})
+    retriever = db.as_retriever(search_kwargs={"k": 6})
 
 
     api_key = os.environ.get("GOOGLE_API_KEY")
@@ -84,7 +84,7 @@ def create_qa_chain():
             # Sorgu anında da bozulmuşsa: DB'yi yeniden kurup 1 kez daha dene
             shutil.rmtree(DB_DIR, ignore_errors=True)
             db2 = build_db(embeddings)
-            retriever2 = db2.as_retriever(search_kwargs={"k": 3})
+            retriever2 = db2.as_retriever(search_kwargs={"k": 6})
             docs = retriever2.invoke(question)
 
         context = "\n\n".join(d.page_content for d in docs)
